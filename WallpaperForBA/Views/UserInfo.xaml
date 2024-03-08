@@ -1,0 +1,40 @@
+﻿<MyViewBase x:TypeArguments="vm:UserInfoViewModel" x:Class="WallpaperForBA.Views.UserInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WallpaperForBA.Views"
+             xmlns:vm="clr-namespace:WallpaperForBA.ViewModels" d:DataContext="{d:DesignInstance Type=vm:UserInfoViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid x:Name="userinfo_area"  VerticalAlignment="Top" Margin="40 20" HorizontalAlignment="Left" >
+        <StackPanel Orientation="Horizontal" Name="userinfo_bg">
+            <Border Panel.ZIndex="2" Effect="{StaticResource shadow1}" CornerRadius="8 0 0 8" Background="#133453">
+                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="50 15 10 15">
+
+
+                    <StackPanel VerticalAlignment="Center">
+                        <StackPanel.RenderTransform>
+                            <SkewTransform AngleX="-10"/>
+                        </StackPanel.RenderTransform>
+                        <TextBlock HorizontalAlignment="Right" Margin="0 0 10 -10">
+                                        <Run FontSize="33" Foreground="#efe029" Text="{Binding NowTime,StringFormat={}{0:M月},FallbackValue=2月}"/> <LineBreak/>
+                                        <Run FontSize="54" Foreground="White" Text="{Binding NowTime,StringFormat={}{0:dd},FallbackValue=25}"/>
+                        </TextBlock>
+
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1">
+                        <TextBlock HorizontalAlignment="Left" FontSize="30" Foreground="White" Text="{Binding UserName,FallbackValue=BlueArchive}"/>
+                        <Border Width="250" HorizontalAlignment="Left" Height="6" Background="#58e4f4" Margin="0 10 0 6"/>
+                        <TextBlock HorizontalAlignment="Left" FontSize="26" Foreground="#58e4f4" Text="{Binding MachineName,FallbackValue=loading...}"/>
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <SkewedBorder MinWidth="28" CornerRadius=" 0 8 8 0" Background="#133453"/>
+
+        </StackPanel>
+    </Grid>
+
+</MyViewBase>

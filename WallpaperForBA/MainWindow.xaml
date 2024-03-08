@@ -1,0 +1,105 @@
+﻿<Window x:Class="WallpaperForBA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WallpaperForBA"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        xmlns:vm="clr-namespace:WallpaperForBA.ViewModels"
+        WindowStyle="None"
+        Background="Transparent"
+        WindowState="Maximized"
+        Title="MainWindow" d:Height="910" d:Width="2000"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        TextElement.FontFamily="{StaticResource default_font}">
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Shared.xaml"/>
+                
+                
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.Resources>
+
+
+            <Storyboard x:Key="focus">
+                <DoubleAnimation Storyboard.TargetName="t_rp"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="-200"/>
+                <DoubleAnimation Storyboard.TargetName="t_ui"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="-200"/>
+
+
+                <DoubleAnimation Storyboard.TargetName="b_bp"  Storyboard.TargetProperty="(Canvas.Bottom)"  Duration="00:00:00.15" To="-200"/>
+                <DoubleAnimation Storyboard.TargetName="focus_tb"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="10"/>
+
+            </Storyboard>
+
+
+
+            <Storyboard x:Key="unfocus">
+                <DoubleAnimation Storyboard.TargetName="t_rp"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="0"/>
+                <DoubleAnimation Storyboard.TargetName="t_ui"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="0"/>
+
+
+                <DoubleAnimation Storyboard.TargetName="b_bp"  Storyboard.TargetProperty="(Canvas.Bottom)"  Duration="00:00:00.15" To="60"/>
+                <DoubleAnimation Storyboard.TargetName="focus_tb"  Storyboard.TargetProperty="(Canvas.Top)"  Duration="00:00:00.15" To="100"/>
+
+            </Storyboard>
+        </Grid.Resources>
+        
+        <Border Name="bg" Visibility="Collapsed">
+            <Border.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/bg_1.jpeg"/>
+            </Border.Background>
+        </Border>
+
+
+        <Border d:Visibility="Visible" Visibility="Collapsed" Name="ui_foo" d:IsHidden="True" >
+            <Border.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/with_UI.png"/>
+            </Border.Background>
+        </Border>
+        <Canvas xmlns:v="clr-namespace:WallpaperForBA.Views">
+            <v:UserInfo x:Name="t_ui" Canvas.Top="0" Canvas.Left="0"/>
+            <v:BottomPanel x:Name="b_bp" Canvas.Bottom="60" 
+                           Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Canvas},Path=ActualWidth}"/>
+            <v:RightPanel x:Name="t_rp" Canvas.Right="0" Canvas.Top="0"/>
+
+
+            <StackPanel x:Name="focus_tb" Canvas.Right="80" Canvas.Top="100" Margin="0 6" Grid.Row="1" HorizontalAlignment="Right">
+                <StackPanel.Resources>
+
+                    <Style TargetType="SkewedBorder" BasedOn="{StaticResource sb_base_style}">
+                        <Setter Property="Background" Value="#CCFFFFFF"/>
+                        <Setter Property="Padding" Value="10 0 20 0"/>
+                        <Setter Property="Margin" Value="12 7"/>
+                        <Setter Property="Height" Value="62"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <SkewedBorder Cursor="Hand">
+                    <ToggleButton BorderThickness="0" Background="Transparent">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:ControlStoryboardAction Storyboard="{StaticResource focus}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:ControlStoryboardAction Storyboard="{StaticResource unfocus}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image Width="42" Margin="18 0" Source="/Assets/expand.png" Effect="{StaticResource ico_color_replace_effect}"/>
+
+                    </ToggleButton>
+                </SkewedBorder>
+            </StackPanel>
+
+
+
+        </Canvas>
+    </Grid>
+</Window>

@@ -1,0 +1,139 @@
+﻿<MyViewBase x:TypeArguments="vm:BottomPanelViewModel" 
+                  xmlns:vm="clr-namespace:WallpaperForBA.ViewModels"  x:Class="WallpaperForBA.Views.BottomPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WallpaperForBA.Views"
+             mc:Ignorable="d"
+            xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             d:DataContext="{d:DesignInstance Type=vm:BottomPanelViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Padding="80 0">
+        
+        <Grid  VerticalAlignment="Bottom" MinHeight="128">
+            <SkewedBorder Height="70" VerticalAlignment="Bottom">
+                <StackPanel Margin="0 0 20 10" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+
+                    <Image Opacity=".8" Height="16" Source="/Assets/flag_1.png">
+                        <Image.Effect>
+                            <ColorKeyReplaceEffect ColorSource="#377dc1" ColorTarget="#4b6073"/>
+                        </Image.Effect>
+                    </Image>
+
+                    <TextBlock HorizontalAlignment="Right" FontSize="22" Foreground="#4b6073" x:Name="time" Text="{Binding NowTime,StringFormat={}{0:HH:mm},FallbackValue=00:00}"/>
+                </StackPanel>
+
+            </SkewedBorder>
+            <ScrollViewer MaxHeight="120" x:Name="sv" Margin="20 0 160 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                
+                <ItemsControl Background="#01FFFFFF" x:Name="ic" BorderThickness="0" ItemsSource="{Binding Icons}">
+                    <ItemsControl.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="刷新" Click="MenuItem_Click"></MenuItem>
+                        </ContextMenu>
+                    </ItemsControl.ContextMenu>
+                    <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                            <Border Cursor="Hand" RenderTransformOrigin="0.5,0.5" MouseRightButtonUp="Border_MouseRightButtonUp" MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                                <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                    <i:ControlStoryboardAction>
+                                        <i:ControlStoryboardAction.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.Target="{Binding RelativeSource={RelativeSource AncestorType=Border,Mode=FindAncestor}}"
+                                        
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                     To="0.8" Duration="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseIn"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+
+                                                <DoubleAnimation
+    Storyboard.Target="{Binding RelativeSource={RelativeSource AncestorType=Border,Mode=FindAncestor}}"
+                                        
+     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+     To="0.8" Duration="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseIn"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </i:ControlStoryboardAction.Storyboard>
+                                    </i:ControlStoryboardAction>
+                                </i:EventTrigger>
+
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <i:ControlStoryboardAction>
+                                        <i:ControlStoryboardAction.Storyboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.Target="{Binding RelativeSource={RelativeSource AncestorType=Border,Mode=FindAncestor}}"
+                                                    
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                     To="1" Duration="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+
+                                                <DoubleAnimation
+                                                    Storyboard.Target="{Binding RelativeSource={RelativeSource AncestorType=Border,Mode=FindAncestor}}"
+                                                    
+                                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                     To="1" Duration="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </i:ControlStoryboardAction.Storyboard>
+                                    </i:ControlStoryboardAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
+                            <StackPanel SnapsToDevicePixels="True" Margin="6" MaxWidth="86" ToolTip="{Binding text}" ToolTipService.Placement="Top" ToolTipService.VerticalOffset="-10">
+                                    <Image HorizontalAlignment="Center" Height="72"  Source="{Binding ico}">
+                                        <i:Interaction.Triggers>
+
+                                            <i:EventTrigger EventName="MouseEnter">
+
+                                                <i:ChangePropertyAction PropertyName="Effect">
+                                                    <i:ChangePropertyAction.Value>
+                                                        <DropShadowEffect Color="Black" ShadowDepth="2" BlurRadius="4" Opacity="0.5" Direction="270"/>
+
+                                                    </i:ChangePropertyAction.Value>
+                                                </i:ChangePropertyAction>
+
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseLeave">
+
+                                                <i:ChangePropertyAction PropertyName="Effect" Value="{x:Null}">
+                                                </i:ChangePropertyAction>
+
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Image>
+                                <TextBlock TextWrapping="WrapWithOverflow" MaxHeight="40" 
+                                           TextTrimming="CharacterEllipsis"  Margin="0 6 0 0" 
+                                           Foreground="#4b6073" FontSize="18" HorizontalAlignment="Center" Text="{Binding text}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            </ScrollViewer>
+
+        </Grid>
+    </Border>
+</MyViewBase>

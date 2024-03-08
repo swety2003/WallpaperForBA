@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <DropShadowEffect x:Key="shadow1" Color="Gray" ShadowDepth="0" BlurRadius="5" Opacity="0.3" Direction="0"/>
+    <SkewTransform x:Key="transform1" AngleX="-10"></SkewTransform>
+    <ColorKeyReplaceEffect x:Key="ico_color_replace_effect" ColorSource="White" ColorTarget="#45629b"/>
+
+
+    <Style x:Key="sb_base_style" TargetType="SkewedBorder">
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="SkewX" Value="-10"/>
+        <Setter Property="Effect" Value="{StaticResource shadow1}"/>
+        <Setter Property="Background" Value="#DDFFFFFF"/>
+        <Setter Property="Padding" Value="0 0 20 0"/>
+
+    </Style>
+</ResourceDictionary>

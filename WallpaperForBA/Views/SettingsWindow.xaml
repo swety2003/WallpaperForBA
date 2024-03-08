@@ -1,0 +1,123 @@
+﻿<Window x:Class="WallpaperForBA.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WallpaperForBA.Views" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip"
+        FontFamily="{StaticResource default_font}"
+        Background="Transparent"
+        Title="设定" Height="450" Width="800">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-10" CaptionHeight="56" />
+    </WindowChrome.WindowChrome>
+    <Border BorderThickness="1" BorderBrush="#dedede"
+        Background="#f0f0ee" CornerRadius="8">
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="56"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="8 8 0 0" BorderThickness="0 0 0 2" BorderBrush="#dedede" Grid.ColumnSpan="2" Background="#f1f2f4">
+                <Grid>
+                    <Border CornerRadius="8" VerticalAlignment="Stretch" Width="160" HorizontalAlignment="Left">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Assets/flag_2.png"/>
+                        </Border.Background>
+                    </Border>
+                    <Border Padding="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderBrush="#fbee61" BorderThickness="0 0 0 6">
+                        <TextBlock FontSize="32" FontWeight="Bold" Foreground="#2d4664" Text="{Binding RelativeSource={RelativeSource AncestorType=Window},Path=Title}"></TextBlock>
+                    </Border>
+
+                    <Image HorizontalAlignment="Right" Margin="10 0" Height="30"  Source="/Assets/close.png">
+                        <Image.Effect>
+                            <ColorKeyReplaceEffect ColorSource="White" ColorTarget="#2d4664"/>
+                        </Image.Effect>
+                    </Image>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#b3c0c9" Margin="10">
+                
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Background="#c6e9ff">
+
+                        <ListBox FontSize="24" Padding="0" FontWeight="Bold" Background="Transparent" Foreground="#1b6588" BorderThickness="0" VerticalAlignment="Top">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#1b6588"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="Padding" Value="15"/>
+                                    <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                                    <Setter Property="BorderBrush" Value="#b9daec"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                
+                                                <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}" Padding="10 0">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup Name="CommonStates">
+                                                            <VisualState Name="Normal">
+                                                            </VisualState>
+                                                            <VisualState Name="MouseOver">
+                                                                <VisualState.Storyboard>
+                                                                    <Storyboard>
+
+                                                                        <ColorAnimation Storyboard.TargetName="{Binding RelativeSource={RelativeSource AncestorType=Border}}" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                       To="LightBlue" Duration="0:0:0.15" />
+                                                                    </Storyboard>
+                                                                </VisualState.Storyboard>
+                                                            </VisualState>
+                                                            <VisualState Name="Selected">
+                                                                <VisualState.Storyboard>
+                                                                    <Storyboard>
+
+                                                                        <ColorAnimation Storyboard.TargetName="{Binding RelativeSource={RelativeSource AncestorType=Border}}" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+To="White" Duration="0:0:0.15" />
+                                                                        <ColorAnimation Storyboard.TargetName="{Binding RelativeSource={RelativeSource AncestorType=Border}}" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
+To="Black" Duration="0:0:0.15" />
+                                                                    </Storyboard>
+                                                                </VisualState.Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        
+                                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                    </Border>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBoxItem>
+                            233
+                        </ListBoxItem>
+                            <ListBoxItem>
+                                设置
+                            </ListBoxItem>
+                        </ListBox>
+
+                        <Image Opacity=".4" Margin="10" Height="12" Source="/Assets/flag_1.png" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Border Grid.Column="1" BorderThickness="6" BorderBrush="White">
+                        
+                    </Border>
+                
+                
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
